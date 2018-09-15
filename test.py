@@ -1,15 +1,19 @@
 from Bidak import Bidak
+import help
 
 a = Bidak('Q', 1, 2)
-b = Bidak('K', 1, 1)
-c = Bidak('R', 1, 3)
-d = Bidak('A', 3, 4)
-e = Bidak('B', 0, 1)
+b = Bidak('K', 2, 0)
+c = Bidak('K', 2, 1)
+d = Bidak('r', 2, 2)
+e = Bidak('R', 3, 2)
 
 list = []
+list.append(a)
 list.append(b)
 list.append(c)
 list.append(d)
 list.append(e)
 
-print (a.conflict(list, "PUTIH"))
+print (help.totalConflict(list, "HITAM"))
+print (help.totalConflict(list, "PUTIH"))
+help.printResult(list)

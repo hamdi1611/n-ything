@@ -5,6 +5,21 @@ class Bidak:
         self.x = x
         self.y = y
 
+    # Getter dan Setter
+    def getChar(self):
+        return self.char
+    def getX(self):
+        return self.x
+    def getY(self):
+        return self.y
+    def setX(self, x):
+        self.x = x
+    def setY(self, y):
+        self.y = y
+    def setCoor(self, x, y):
+        self.setX(x)
+        self.setY(y)
+
     # Memeriksa apakah bidak merupakan warna putih atau tidak
     def isWhite(self):
         return (self.char >='A' and self.char <= 'Z')
@@ -37,8 +52,8 @@ class Bidak:
         else:
             min = 'a'
             max = 'z'
+        
         N = 0
-
         # Menghitung jumlah konflik jika bidak adalah knight (kuda)
         if self.char=='K' or self.char=='k':
             for e in list_of_object:
@@ -68,28 +83,28 @@ class Bidak:
                 for e in list_of_object:
                     # kondisi konflik di atas bidak
                     if e.x==self.x and e.y<self.y:
-                        if chars_conflict[0][0]==' ' or chars_conflict[0][2] > e.y:
+                        if chars_conflict[0][0]==' ' or chars_conflict[0][2] < e.y:
                             chars_conflict[0][0] = e.char
                             chars_conflict[0][1] = e.x
                             chars_conflict[0][2] = e.y
                     
                     # kondisi konflik di bawah bidak
                     elif e.x==self.x and e.y>self.y:
-                        if chars_conflict[1][0]==' ' or chars_conflict[0][2] < e.y:
+                        if chars_conflict[1][0]==' ' or chars_conflict[0][2] > e.y:
                             chars_conflict[1][0] = e.char
                             chars_conflict[1][1] = e.x
                             chars_conflict[1][2] = e.y
 
                     # kondisi konflik di kiri bidak
                     elif e.x<self.x and e.y==self.y:
-                        if chars_conflict[2][0]==' ' or chars_conflict[0][1] > e.x:
+                        if chars_conflict[2][0]==' ' or chars_conflict[0][1] < e.x:
                             chars_conflict[2][0] = e.char
                             chars_conflict[2][1] = e.x
                             chars_conflict[2][2] = e.y
 
                     # kondisi konflik di kanan bidak
                     elif e.x>self.x and e.y==self.y:
-                        if chars_conflict[3][0]==' ' or chars_conflict[0][1] < e.x:
+                        if chars_conflict[3][0]==' ' or chars_conflict[0][1] > e.x:
                             chars_conflict[3][0] = e.char
                             chars_conflict[3][1] = e.x
                             chars_conflict[3][2] = e.y
@@ -111,28 +126,28 @@ class Bidak:
                     if int(m)==1 or int(m)==-1:
                         # kondisi konflik di atas-kiri bidak
                         if e.y<self.y and e.x<self.x:
-                            if chars_conflict2[0][0]==' ' or chars_conflict2[0][2] > e.y:
+                            if chars_conflict2[0][0]==' ' or chars_conflict2[0][2] < e.y:
                                 chars_conflict2[0][0] = e.char
                                 chars_conflict2[0][1] = e.x
                                 chars_conflict2[0][2] = e.y
 
                         # kondisi konflik di atas-kanan bidak
                         elif e.y<self.y and e.x>self.x:
-                            if chars_conflict2[1][0]==' ' or chars_conflict2[0][2] > e.y:
+                            if chars_conflict2[1][0]==' ' or chars_conflict2[0][2] < e.y:
                                 chars_conflict2[1][0] = e.char
                                 chars_conflict2[1][1] = e.x
                                 chars_conflict2[1][2] = e.y
 
                         # kondisi konflik di bawah-kiri bidak
                         elif e.y>self.y and e.x<self.x:
-                            if chars_conflict2[2][0]==' ' or chars_conflict2[0][2] < e.y:
+                            if chars_conflict2[2][0]==' ' or chars_conflict2[0][2] > e.y:
                                 chars_conflict2[2][0] = e.char
                                 chars_conflict2[2][1] = e.x
                                 chars_conflict2[2][2] = e.y
 
                         # kondisi konflik di bawah-kanan bidak
                         elif e.y>self.y and e.x>self.x:
-                            if chars_conflict2[3][0]==' ' or chars_conflict2[0][2] < e.y:
+                            if chars_conflict2[3][0]==' ' or chars_conflict2[0][2] > e.y:
                                 chars_conflict2[3][0] = e.char
                                 chars_conflict2[3][1] = e.x
                                 chars_conflict2[3][2] = e.y
