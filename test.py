@@ -14,6 +14,8 @@ list.append(c)
 list.append(d)
 list.append(e)
 
+list = help.getListRandomized()
+
 print (help.totalConflict(list, "HITAM"))
 print (help.totalConflict(list, "PUTIH"))
 help.printResult(list)
