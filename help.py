@@ -4,8 +4,7 @@ from Bidak import Bidak
 import random
 
 # Mengambil informasi dari file txt
-# Mengembalikan list of object Bidak
-# Semua Bidak dalam posisi (0, 0)
+# Mengembalikan list of object Bidak {Semua Bidak dalam posisi (0, 0)}
 def getList():
     f = open('input.txt', 'r')
     list_of_object = []
@@ -18,6 +17,8 @@ def getList():
             list_of_object.append(Bidak(char, 0, 0))
     return list_of_object
 
+# Mengambil informasi dari file txt
+# Mengembalikan list of object Bidak {Semua Bidak dalam posisi RANDOM UNIK}
 def getListRandomized():
     f = open('input.txt', 'r')
     list_of_object = []
@@ -28,6 +29,7 @@ def getListRandomized():
             if info[0][0]=='B':
                 char = char.lower()
             
+            # add objek bidak dengan posisi unik ke dalam list
             obj = Bidak(char, random.randint(0,7), random.randint(0,7))
             while obj.isSameCoorExist(list_of_object):
                 obj = Bidak(char, random.randint(0,7), random.randint(0,7))
@@ -52,6 +54,7 @@ def charCoor(x, y, list_of_object):
             return e.getChar()
     return '.'
 
+# Menampilkan seluruh objek bidak dalam matriks 8 x 8
 def printResult(list_of_object):
     for j in range (0, 8):
         for i in range (0, 8):
