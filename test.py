@@ -12,10 +12,14 @@ list.append(a)
 list.append(b)
 list.append(c)
 list.append(d)
-list.append(e)
+#list.append(e)
 
 list = help.getListRandomized()
 
 print (help.totalConflict(list, "HITAM"))
 print (help.totalConflict(list, "PUTIH"))
 help.printResult(list)
+
+list2 = []
+list2 = e.otherPositions(list)
+help.printResult(list2)

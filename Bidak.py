@@ -24,18 +24,16 @@ class Bidak:
     def isWhite(self):
         return (self.char >='A' and self.char <= 'Z')
 
-    # Mengembalikan list of object-object yang merupakan adjacent-nya 
-    def tetangga(self):
-        tetangga = []
-        if self.x > 0:
-            tetangga.append(Bidak(self.char, self.x-1, self.y))
-        if self.x < 7:
-            tetangga.append(Bidak(self.char, self.x+1, self.y))
-        if self.y > 0:
-            tetangga.append(Bidak(self.char, self.x, self.y-1))
-        if self.y < 7:
-            tetangga.append(Bidak(self.char, self.x, self.y+1))
-        return tetangga
+    # Mengembalikan list of object yang memenuhi kriteria "otherPositions"
+    # "therPositions" adalah semua kemungkinan objek dengan posisi yang tidak sama dengan semua objek pada list_of_object
+    def otherPositions(self, list_of_object):
+        others = []
+        for j in range(0,8):
+            for i in range(0,8):
+                obj = Bidak(self.char, i, j)
+                if not(obj.isSameCoorExist(list_of_object)) and not(obj.getX()==self.x and obj.getY()==self.y):
+                    others.append(obj)
+        return others
 
     # Memeriksa apakah ada objek(bidak) dalam list_of_object yang memiliki koordinat yang sama dengan bidak
     def isSameCoorExist(self, list_of_object):
