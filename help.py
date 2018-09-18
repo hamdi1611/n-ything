@@ -37,6 +37,14 @@ def getListRandomized():
             list_of_object.append(obj)
     return list_of_object
 
+def score(list_of_object):
+    return (totalConflict(list_of_object, "HITAM") - totalConflict(list_of_object, "PUTIH"))
+
+# list1 dan list2 adalah list of object Bidak
+# Memeriksa apakah score list1 lebih besar dari score list2
+def isBetter(list1, list2):
+    return (score(list1) > score(list2))
+
 # Mengembalikan jumlah total konflik bidak-bidak berwarna PUTIH dengan bidak lain
 # berdasarkan warna yang ingin dihitung konfliknya ("PUTIH" atau "HITAM")
 def totalConflict(list_of_object, color):

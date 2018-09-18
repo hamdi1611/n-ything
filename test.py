@@ -14,12 +14,16 @@ list.append(c)
 list.append(d)
 #list.append(e)
 
-list = help.getListRandomized()
+list1 = help.getListRandomized()
+list2 = help.getListRandomized()
 
-print (help.totalConflict(list, "HITAM"))
-print (help.totalConflict(list, "PUTIH"))
-help.printResult(list)
-
-list2 = []
-list2 = e.otherPositions(list)
+help.printResult(list1)
 help.printResult(list2)
+
+print (help.totalConflict(list1, "HITAM"))
+print (help.totalConflict(list1, "PUTIH"))
+
+print (help.totalConflict(list2, "HITAM"))
+print (help.totalConflict(list2, "PUTIH"))
+
+print (help.isBetter(list1, list2))
