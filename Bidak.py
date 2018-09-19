@@ -25,7 +25,7 @@ class Bidak:
         return (self.char >='A' and self.char <= 'Z')
 
     # Mengembalikan list of object yang memenuhi kriteria "otherPositions"
-    # "therPositions" adalah semua kemungkinan objek dengan posisi yang tidak sama dengan semua objek pada list_of_object
+    # "otherPositions" adalah semua kemungkinan objek dengan posisi lain yang tidak sama dengan semua objek pada list_of_object
     def otherPositions(self, list_of_object):
         others = []
         for j in range(0,8):
