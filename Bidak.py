@@ -42,6 +42,10 @@ class Bidak:
                 return True
         return False
     
+    # Memeriksa apakah obj memilki posisi yang diagonal dengan bidak
+    def isDiagonal(self, obj):
+        return (self.getX()-obj.getX() == self.getY()-obj.getY()) or (self.getX()-obj.getX() == obj.getY()-self.getY())
+
     # Menghitung jumlah konflik bidak dengan bidak lain berdasarkan warna putih/hitam
     def conflict(self, list_of_object, color):
         if color=="PUTIH":
@@ -115,13 +119,7 @@ class Bidak:
                 chars_conflict2 = [[' ', 0, 0], [' ', 0, 0], [' ', 0, 0], [' ', 0, 0]]
 
                 for e in list_of_object:
-                    # nilai gradient harus 1 atau -1 (menyatakan posisi bidak relatif serong)
-                    if self.x - e.x == 0:
-                        m = 0
-                    else:
-                        m = (self.y - e.y)/(self.x - e.x)
-                    
-                    if int(m)==1 or int(m)==-1:
+                    if self.isDiagonal(e):
                         # kondisi konflik di atas-kiri bidak
                         if e.y<self.y and e.x<self.x:
                             if chars_conflict2[0][0]==' ' or chars_conflict2[0][2] < e.y:
