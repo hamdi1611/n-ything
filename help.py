@@ -38,21 +38,33 @@ def getListRandomized():
     return list_of_object
 
 def score(list_of_object):
-    return (totalConflict(list_of_object, "HITAM") - totalConflict(list_of_object, "PUTIH"))
+    return (totalConflictLawan(list_of_object) - totalConflictSesama(list_of_object))
 
 # list1 dan list2 adalah list of object Bidak
 # Memeriksa apakah score list1 lebih besar dari score list2
 def isBetter(list1, list2):
     return (score(list1) > score(list2))
 
-# Mengembalikan jumlah total konflik bidak-bidak berwarna PUTIH dengan bidak lain
+# Mengembalikan total conflict sesama dan lawan dengan format [sesama, lawan]
 # berdasarkan warna yang ingin dihitung konfliknya ("PUTIH" atau "HITAM")
-def totalConflict(list_of_object, color):
-    total = 0
+def totalConflict(list_of_object):
+    total = [0, 0] # [sesama, lawan]
+
     for e in list_of_object:
         if e.isWhite():
-            total += e.conflict(list_of_object, color)
+            total[0] += e.conflict(list_of_object, "PUTIH")
+            total[1] += e.conflict(list_of_object, "HITAM")
+        else:
+            total[0] += e.conflict(list_of_object, "HITAM")
+            total[1] += e.conflict(list_of_object, "PUTIH")
+
     return total
+
+def totalConflictSesama(list_of_object):
+    return totalConflict(list_of_object)[0]
+
+def totalConflictLawan(list_of_object):
+    return totalConflict(list_of_object)[1]
 
 # Mengembalikan character dari Object Bidak yang memilki koordinat (x,y)
 # jika tidak ada, mengembalikan '.'
