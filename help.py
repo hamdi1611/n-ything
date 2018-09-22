@@ -70,11 +70,13 @@ def printResult(list_of_object):
 # Mengembalikan sebuah list_of_object baru yang merupakan tetangga list input secara random
 def getRandomTetangga(list_of_object):
     i = random.randint(0, len(list_of_object))
-    x = random.randint(0,7)
-    y = random.randint(0,7)
-
+    
     new_list = list(list_of_object)
     e = new_list.pop(i)
+
+    while e.isSameCoorExist(list_of_object):
+        e.setCoor(random.randint(0,7), random.randint(0,7))
+
     e.setCoor(x, y)
     new_list.append(e)
     
