@@ -28,4 +28,7 @@ elif nama == 3:
 	answer = soal
 
 help.printResult(answer)
-print (help.totalConflictSesama(answer), help.totalConflictLawan(answer))
+
+result = []
+result = help.totalConflict(answer)
+print (result[0], result[1])
