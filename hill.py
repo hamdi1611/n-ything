@@ -5,6 +5,7 @@ import help
 # Masukan : list_of_object Bidak dan bilangan maksimum proses hill-climbing
 def hill(list_of_object, n):
     if n==0:
+        print ("Mencapai batas maksimum")
         return list_of_object
     else:
         # format best_solution : score, index, x, y
@@ -14,7 +15,7 @@ def hill(list_of_object, n):
             temp_list = list(list_of_object)
             x = temp_list.pop(i)
 
-            # mengiterasi semua kemungkinan tetangga(satu bidak dipindahkan)
+            # mengiterasi semua kemungkinan tetangga (satu bidak dipindahkan)
             # mencari kemungkinan tetangga terbaik yang lebih baik dari list awal
             others = x.otherPositions(temp_list)
             for e in others:
