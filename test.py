@@ -12,7 +12,8 @@ help.printResult(answer)
 print (help.totalConflictSesama(answer))
 print (help.totalConflictLawan(answer))
 for e in answer:
+    print (e.getChar(), e.getX(), e.getY())
     if e.isWhite():
-        print (e.getChar(), e.conflict(answer, "PUTIH"), e.conflict(answer, "HITAM"))
+        print (e.conflict(answer, "PUTIH"), e.conflict(answer, "HITAM"))
     else:
-       print (e.getChar(), e.conflict(answer, "HITAM"), e.conflict(answer, "PUTIH"))
+        print (e.conflict(answer, "HITAM"), e.conflict(answer, "PUTIH"))
