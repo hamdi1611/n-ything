@@ -1,8 +1,6 @@
 from hill import hill
-from Bidak import Bidak
 import help
 
-x = Bidak('k', 0, 0)
 soal = help.getListRandomized()
 help.printResult(soal)
 print (help.totalConflictSesama(soal))
