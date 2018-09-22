@@ -1,4 +1,5 @@
 #main program
+<<<<<<< HEAD
 
 from hill import hill
 import help
@@ -27,3 +28,9 @@ elif nama == 2:
 
 elif nama == 3:
 	
+=======
+from genetic import genetic
+import help
+
+genetic(5)
+>>>>>>> da6e5b96ce0723d2cbc3c7010333847e972760ee
