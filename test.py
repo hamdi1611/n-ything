@@ -1,4 +1,4 @@
-from hill import hill
+import s_annealing
 import help
 
 soal = help.getListRandomized()
@@ -7,7 +7,7 @@ help.printResult(soal)
 print (help.totalConflictSesama(soal))
 print (help.totalConflictLawan(soal))
 print('\n')
-answer = hill(soal, 1000)
+answer = s_annealing.annealing(soal, 1000)
 help.printResult(answer)
 print (help.totalConflictSesama(answer))
 print (help.totalConflictLawan(answer))

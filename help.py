@@ -77,7 +77,5 @@ def getRandomTetangga(list_of_object):
 
     while e.isSameCoorExist(list_of_object):
         e.setCoor(random.randint(0,7), random.randint(0,7))
-
     new_list.append(e)
-    
     return new_list
