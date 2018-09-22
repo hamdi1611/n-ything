@@ -4,20 +4,6 @@ from Bidak import Bidak
 import random
 
 # Mengambil informasi dari file txt
-# Mengembalikan list of object Bidak {Semua Bidak dalam posisi (0, 0)}
-def getList():
-    f = open('input.txt', 'r')
-    list_of_object = []
-    for line in f:
-        info = line.split()
-        for i in range(0, int(info[2])):
-            char = info[1][0]
-            if info[0][0]=='B':
-                char = char.lower()
-            list_of_object.append(Bidak(char, 0, 0))
-    return list_of_object
-
-# Mengambil informasi dari file txt
 # Mengembalikan list of object Bidak {Semua Bidak dalam posisi RANDOM UNIK}
 def getListRandomized():
     f = open('input.txt', 'r')
@@ -80,3 +66,16 @@ def printResult(list_of_object):
         for i in range (0, 8):
             print (charCoor(i, j, list_of_object), end=" ")
         print ('\n')
+
+# Mengembalikan sebuah list_of_object baru yang merupakan tetangga list input secara random
+def getRandomTetangga(list_of_object):
+    i = random.randint(0, len(list_of_object))
+    x = random.randint(0,7)
+    y = random.randint(0,7)
+
+    new_list = list(list_of_object)
+    e = new_list.pop(i)
+    e.setCoor(x, y)
+    new_list.append(e)
+    
+    return new_list
