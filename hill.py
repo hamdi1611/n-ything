@@ -5,6 +5,7 @@ import help
 # Masukan : list_of_object Bidak dan bilangan maksimum proses hill-climbing
 def hill(list_of_object, n):
     if n==0:
+        print ("Mencapai batas maksimum")
         return list_of_object
     else:
         # format best_solution : score, index, x, y
