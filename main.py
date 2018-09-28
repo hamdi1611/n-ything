@@ -23,7 +23,7 @@ answer = []
 if nama == 1:
 	answer = hill(soal, 1000)
 elif nama == 2:
-	answer = annealing(soal, 2000)
+	answer = annealing(soal, 10000, 100, 5)
 elif nama == 3:
 	answer = soal
 
