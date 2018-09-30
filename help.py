@@ -24,12 +24,7 @@ def getListRandomized():
     return list_of_object
 
 def score(list_of_object):
-    return (totalConflictLawan(list_of_object) - totalConflictSesama(list_of_object))
-
-# list1 dan list2 adalah list of object Bidak
-# Memeriksa apakah score list1 lebih besar dari score list2
-def isBetter(list1, list2):
-    return (score(list1) > score(list2))
+    return (totalConflictLawan(list_of_object) - 1.5*totalConflictSesama(list_of_object))
 
 # Mengembalikan total conflict sesama dan lawan dengan format [sesama, lawan]
 # berdasarkan warna yang ingin dihitung konfliknya ("PUTIH" atau "HITAM")
@@ -77,7 +72,5 @@ def getRandomTetangga(list_of_object):
 
     while e.isSameCoorExist(list_of_object):
         e.setCoor(random.randint(0,7), random.randint(0,7))
-
     new_list.append(e)
-    
     return new_list
