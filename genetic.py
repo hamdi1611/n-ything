@@ -32,27 +32,37 @@ def init(totalChromosome):
 		randomizedState = help.getListRandomized()
 		population.append({ 
 			"state": randomizedState, 
-			"chromosome": convertStateToChromosome(randomizedState)
+			"chromosome": convertStateToChromosome(randomizedState),
+			"score": None
 		})
 	return population
 
 # Menghitung fitness score tiap populasi untuk menentukan mana kromosom terbaik dan terburuk
 def evaluation(population):
-	score = []
 	for i in range(len(population)):
-		score.append(help.score(population[i]["state"]))
-	return score
+		population[i]['score'] = help.score(population[i]["state"])
 
-def selection(states, fitness_score):
-	pass
+def selection(population):
+	# Melakukakan pengacakan pada populasi
+	random.shuffle(population)
+
 	# Mendapatkan index chromosome dengan fitness score terendah dan tertinggi
-	# Menghapus chromosome terburuk dan menggandakan chromosome terbaik
-	# Melakukakan pengacakan pada population
+	scores = []
+	for i in range(len(population)):
+		scores.append(population[i]['score'])
 
-def crossover(states):
+	bestChromosomeIndex = scores.index(max(scores))
+	worstChromosomeIndex = scores.index(min(scores))
+
+	# Menghapus chromosome terburuk dan menggandakan chromosome terbaik (jika ganjil)
+	population.pop(worstChromosomeIndex)
+	if (len(population) % 2 == 1):
+		population.append(population[bestChromosomeIndex])
+
+def crossover(population):
 	pass
 
-def mutation(states):
+def mutation(population):
 	pass
 
 ### Fungsi utama ###
@@ -63,15 +73,15 @@ def genetic():
 	bestResult = []
 
 	# Melakukan pencarian kromosom terbaik di tiap iterasi
-	for i in range(totalIteration):
+	for _ in range(totalIteration):
 		# Mendapatkan kumpulan list of bidak sebanyak k buah
 		population = init(totalChromosome)
 
 		# Mendapatkan fitness score tiap chromosome
-		fitness_score = evaluation(population)
+		evaluation(population)
 
 		# Melakukan seleksi pada masing-masing chromosome berdasarkan fitness score
-		selection(population, fitness_score)
+		selection(population)
 
 		# Menentukan kumpulan gen yang akan dilakukan crossover
 		crossover(population)
