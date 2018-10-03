@@ -1,47 +1,52 @@
 import help
 import random
 
-### Fungsi pembantu ###
+#######################
+### Fungsi Pembantu ###
+#######################
 
-def convertToChromosome(states):
+# Mengubah state yang merupakan list of Bidak menjadi kromosom yang merupakan list of koordinat
+def convertStateToChromosome(state):
 	chromosome = []
-	for i in range(len(states)):
-		chromosome.append(states[i].getX())
-		chromosome.append(states[i].getY())
+	for i in range(len(state)):
+		chromosome.append(state[i].getX())
+		chromosome.append(state[i].getY())
 	return chromosome
 
-def getPopulation(states):
+# Mengembalikan kromosom yang skornya paling tinggi dibandingkan yang lain
+def findBestChromosome(population):
+	bestChromosomeIndex = 0
+	for i in range(len(population) - 1):
+		if help.score(population[i]["state"]) > help.score(population[bestChromosomeIndex]["state"]):
+			bestChromosomeIndex = i
+	return population[bestChromosomeIndex]
+
+#######################
+### Fungsi Genetic ####
+#######################
+
+# Inisiasi populasi dengan sejumlah kromosom sesuai inputan pengguna 
+def init(totalChromosome):
 	population = []
-	for i in range(len(states)):
-		population.append(convertToChromosome(states[i]))
+	for _ in range(totalChromosome):
+		randomizedState = help.getListRandomized()
+		population.append({ 
+			"state": randomizedState, 
+			"chromosome": convertStateToChromosome(randomizedState)
+		})
 	return population
 
-def findBestChromosome(states):
-	return states[0]
-
-### Fungsi genetic ###
-
-def init(k):
-	states = []
-	for i in range(k):
-		states.append(help.getListRandomized())
-	return states
-	
-	# Mengubah tiap states (list of bidak) menjadi population (list of chromosome) 
-	# population = getPopulation(states)
-
-def evaluation(states):
+# Menghitung fitness score tiap populasi untuk menentukan mana kromosom terbaik dan terburuk
+def evaluation(population):
 	score = []
-	for i in range(len(states)):
-		score.append(help.score(states[i]))
+	for i in range(len(population)):
+		score.append(help.score(population[i]["state"]))
 	return score
 
 def selection(states, fitness_score):
 	pass
 	# Mendapatkan index chromosome dengan fitness score terendah dan tertinggi
-
 	# Menghapus chromosome terburuk dan menggandakan chromosome terbaik
-
 	# Melakukakan pengacakan pada population
 
 def crossover(states):
@@ -52,21 +57,30 @@ def mutation(states):
 
 ### Fungsi utama ###
 
-def genetic(k):
-	# Mendapatkan kumpulan list of bidak sebanyak k buah
-	states = init(k)
+def genetic():
+	totalChromosome = int((input("Masukkan jumlah kromosom yang diinginkan: ")))
+	totalIteration = int((input("Masukkan jumlah iterasi yang diinginkan: ")))
+	bestResult = []
 
-	# Mendapatkan fitness score tiap chromosome
-	fitness_score = evaluation(states)
+	# Melakukan pencarian kromosom terbaik di tiap iterasi
+	for i in range(totalIteration):
+		# Mendapatkan kumpulan list of bidak sebanyak k buah
+		population = init(totalChromosome)
 
-	# Melakukan seleksi pada masing-masing chromosome berdasarkan fitness score
-	selection(states, fitness_score)
+		# Mendapatkan fitness score tiap chromosome
+		fitness_score = evaluation(population)
 
-	# Menentukan kumpulan gen yang akan dilakukan crossover
-	crossover(states)
+		# Melakukan seleksi pada masing-masing chromosome berdasarkan fitness score
+		selection(population, fitness_score)
 
-	# Melakukan mutasi pada chromosome terpilih
-	mutation(states)
+		# Menentukan kumpulan gen yang akan dilakukan crossover
+		crossover(population)
 
-	# Mengembalikan chromosome terbaik dari hasil mutasi
-	return findBestChromosome(states)
+		# Melakukan mutasi pada chromosome terpilih
+		mutation(population)
+		
+		# Mengembalikan chromosome terbaik dari hasil mutasi
+		bestResult.append(findBestChromosome(population))
+
+	# Mengembalikan chromosome terbaik dari semua hasil iterasi
+	return findBestChromosome(bestResult)['state']

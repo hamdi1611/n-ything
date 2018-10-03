@@ -25,7 +25,7 @@ if nama == 1:
 elif nama == 2:
 	answer = annealing(soal, 10000, 100, 5)
 elif nama == 3:
-	answer = genetic(4)
+	answer = genetic()
 
 help.printResult(answer)
 
