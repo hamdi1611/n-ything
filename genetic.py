@@ -55,15 +55,48 @@ def selection(population):
 	worstChromosomeIndex = scores.index(min(scores))
 
 	# Menghapus chromosome terburuk dan menggandakan chromosome terbaik (jika ganjil)
-	population.pop(worstChromosomeIndex)
 	if (len(population) % 2 == 1):
 		population.append(population[bestChromosomeIndex])
+	population.pop(worstChromosomeIndex)	
 
 def crossover(population):
-	pass
+	# Melakukan pengulangan pada tiap pasangan
+	for i in range(0, len(population) - 1, 2):
+		randomPoint = random.randint(0, len(population[i]['state']))
+		firstStateEndSlice = population[i]['state'][randomPoint:]
+		secondStateEndSlice = population[i+1]['state'][:randomPoint]
+
+		# Melakukan swap pada tiap pasangan
+		firstStateEndSlice, secondStateEndSlice = secondStateEndSlice, firstStateEndSlice
 
 def mutation(population):
-	pass
+	# Membangkitkan secara acak koordinat baru
+	new_x = random.randint(1, 8)
+	new_y = random.randint(1, 8)
+	mutated = False
+
+	# Melakukan pengulangan hingga salah satu kromosom termutasi
+	while not mutated:
+		# Memilih kromosom yang akan dimutasi secara acak
+		selectedChromosomeIndex = random.randint(0, len(population) - 1)
+		selectedChromosome = population[selectedChromosomeIndex]
+		selectedStateIndex = random.randint(0, len(selectedChromosome['state']) - 1)
+		selectedState = selectedChromosome['state'][selectedStateIndex]
+		
+		# Mengecek kromosom lain yang memiliki koordinat sama
+		sameCoorExist = 0
+		for _ in range(len(population[selectedChromosomeIndex]['state'])):
+			restPopulationState = list(population[selectedChromosomeIndex]['state'])
+			restPopulationState.pop(selectedStateIndex)
+			if (selectedState.isSameCoorExist(restPopulationState)):
+				sameCoorExist = sameCoorExist + 1
+
+		# Hanya dimutasi jika tidak ada koordinat yang sama dengan yang lain
+		if (sameCoorExist == 0):
+			selectedState.setX(new_x)
+			selectedState.setY(new_y)
+			selectedChromosome['chromosome'] = convertStateToChromosome(selectedChromosome['state'])
+			mutated = True
 
 ### Fungsi utama ###
 
